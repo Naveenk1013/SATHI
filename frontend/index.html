@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SATHI - By Naveen Kumar</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.0/marked.min.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+</head>
+<body class="dark-mode bg-gray-900 text-white flex flex-col min-h-screen">
+    <div class="background-blobs">
+        <div class="blob-1"></div>
+        <div class="blob-2"></div>
+        <div class="blob-3"></div>
+    </div>
+
+    <header class="bg-gray-800/50 backdrop-blur-md p-4 flex justify-between items-center shadow-md fixed top-0 left-0 w-full z-10">
+        <div class="flex items-center">
+            <img src="logo.png" alt="SATHI Logo" class="h-10 w-auto mr-3">
+            <h1 class="text-2xl font-bold">SATHI</h1>
+            </div>
+           <div>
+            <p>
+            <i class="text-1xl font-bold">Smart Assistant for Tourism & Hospitality Innovation by Naveen Kumar</i>
+        </p>
+        </div>
+        <button id="mode-toggle" class="p-2 rounded-full bg-gray-700/50 backdrop-blur-md hover:bg-gray-600/50 transition-colors">
+            <i id="mode-icon" class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <main class="flex-grow flex justify-center p-4 pt-20">
+        <div class="w-full max-w-3xl flex flex-col h-full">
+            <div id="chat-container" class="chat-container flex-grow overflow-y-auto p-4 bg-gray-800/50 backdrop-blur-md rounded-lg shadow-inner border border-white/10 min-h-[20vh]">
+                <!-- Chat messages will be injected here -->
+            </div>
+            <div class="input-area mt-4">
+                <div class="input-wrapper flex items-center bg-gray-700/50 backdrop-blur-md rounded-lg p-2 shadow-md border border-white/10">
+                    <input type="text" id="user-input" placeholder="Type your message here..." class="flex-grow bg-transparent border-none text-white focus:outline-none p-2">
+                    <button id="send-button" class="ml-2 p-2 bg-purple-600/80 hover:bg-purple-700/80 rounded-full transition-colors">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="input-footer text-xs text-gray-400 mt-1 text-center">
+                    Press Enter to send
+                </div>
+            </div>
+            <div class="feature-buttons flex justify-center space-x-4 mt-4">
+                <button id="upload-button" class="feature-button text-white bg-gray-700/50 backdrop-blur-md hover:bg-gray-600/50">
+                    <i class="fas fa-upload mr-2"></i> Upload Document
+                </button>
+                <button id="chat-button" class="feature-button text-white bg-gray-700/50 backdrop-blur-md hover:bg-gray-600/50 hidden">
+                    <i class="fas fa-comment mr-2"></i> Back to Chat
+                </button>
+                <button id="debug-button" class="feature-button text-white bg-green-600/50 hover:bg-green-700/50">
+                    <i class="fas fa-bug mr-2"></i> Test Message
+                </button>
+            </div>
+            <div id="upload-container" class="hidden mt-4 bg-gray-800/50 backdrop-blur-md p-4 rounded-lg shadow-inner border border-white/10">
+                <div class="drag-drop-text text-center space-y-2 cursor-pointer p-4 border-2 border-dashed border-gray-600/50 rounded-lg">
+                    <p>Drag & drop your file here or click to browse</p>
+                    <p class="text-sm">Supports: PDF, DOC, DOCX, TXT (Max 10MB)</p>
+                </div>
+                <input type="file" id="file-input" class="hidden" accept=".pdf,.doc,.docx,.txt">
+                <button id="start-upload" class="feature-button mt-4 bg-purple-600/80 hover:bg-purple-700/80">Analyze Document</button>
+                <div id="upload-status" class="upload-status mt-2"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800/50 backdrop-blur-md p-4 text-center text-gray-500 text-sm mt-auto border-t border-white/10">
+        <div class="footer-section">
+            <h4 class="text-white">Connect</h4>
+            <div class="social-links flex justify-center space-x-4 mt-2">
+                <a href="https://naveenk1013.github.io/Portfolio/" target="_blank" class="social-link hover:text-purple-400">
+                    <i class="fas fa-globe"></i> Portfolio
+                </a>
+                <a href="https://github.com/Naveenk1013/" class="social-link hover:text-purple-400">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/naveen-kumar-8a40bb170/" class="social-link hover:text-purple-400">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
+        </div>
+        <div class="footer-section mt-2">
+            <a href="https://openrouter.ai/deepseek/deepseek-r1-0528:free" class="hover:text-purple-400 mx-2">Documentation</a>
+            <a href="https://www.instagram.com/naveen.k_r/" class="hover:text-purple-400 mx-2">Support</a>
+        </div>
+        <p class="mt-2">SATHI - Smart Assistant for Tourism & Hospitality Innovation<br>
+        <a href="https://hospitalitystuff.blogspot.com/" class="hover:text-purple-400">#breath_success</a></p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" defer></script>
+    <script src="js/app.js" defer></script>
+    <script src="js/upload.js" defer></script>
+</body>
+</html>
