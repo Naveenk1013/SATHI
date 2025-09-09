@@ -56,45 +56,6 @@ def chat():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Endpoint for file upload and analysis
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    try:
-        if 'file' not in request.files:
-            return jsonify({'error': 'No file part'}), 400
-        
-        file = request.files['file']
-        if file.filename == '':
-            return jsonify({'error': 'No selected file'}), 400
-        
-        if file and allowed_file(file.filename):
-            # Generate a unique filename
-            filename = secure_filename(file.filename)
-            unique_filename = f"{uuid.uuid4().hex}_{filename}"
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
-            file.save(filepath)
-            
-            # Analyze the document
-            analysis_result = analyze_document(filepath)
-            
-            # Clean up the file
-            os.remove(filepath)
-            
-            return jsonify({
-                'success': True,
-                'analysis': analysis_result,
-                'filename': filename
-            })
-        else:
-            return jsonify({'error': 'File type not allowed. Please upload TXT, PDF, DOC, or DOCX files.'}), 400
-            
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
-
 
     # Endpoint for file upload and analysis
 @app.route('/upload', methods=['POST'])
@@ -139,4 +100,5 @@ def upload_file():
         # Clean up file if it exists
         if 'filepath' in locals() and os.path.exists(filepath):
             os.remove(filepath)
+
         return jsonify({'error': f'Server error: {str(e)}'}), 500
